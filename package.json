@@ -1,0 +1,17 @@
+{
+  "name": "bookinglite-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "pnpm --filter @bookinglite/api dev",
+    "dev:web": "pnpm --filter @bookinglite/web dev",
+    "dev": "pnpm -w -r dev",
+    "build": "pnpm -w -r build",
+    "start:api": "pnpm --filter @bookinglite/api start",
+    "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0 || true",
+    "test": "pnpm -w -r test"
+  }
+}
