@@ -1,8 +1,23 @@
 FROM node:20-alpine
 WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package files
 COPY package.json pnpm-lock.yaml* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile || true
+RUN pnpm install --frozen-lockfile || pnpm install
+
+# Copy source
 COPY . .
+
+# Generate Prisma client
+RUN pnpm prisma:generate
+
+# Build app
 RUN pnpm build
+
 EXPOSE 4000
-CMD ["node", "dist/index.js"]
+
+# Run migrations and start app
+CMD ["sh", "-c", "pnpm prisma migrate deploy && node dist/index.js"]
