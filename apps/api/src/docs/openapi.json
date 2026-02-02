@@ -1,0 +1,21 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BookingLite API",
+    "version": "0.1.0",
+    "description": "Mini SaaS booking API"
+  },
+  "servers": [{ "url": "/api" }],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register user",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "properties": { "email": { "type": "string" }, "password": { "type": "string" }, "businessName": { "type": "string" } }, "required": ["email","password","businessName"] } } } },
+        "responses": { "200": { "description": "ok" } }
+      }
+    },
+    "/auth/login": {
+      "post": { "summary": "Login", "requestBody": { "required": true }, "responses": { "200": { "description": "ok" } } }
+    }
+  }
+}

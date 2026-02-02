@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import routes from './routes';
+import docs from './routes/docs';
 
 const app = express();
 
@@ -14,6 +15,7 @@ const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use('/api/auth', limiter);
 
 app.use('/api', routes);
+app.use('/api/docs', docs);
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
